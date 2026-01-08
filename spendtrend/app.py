@@ -179,15 +179,17 @@ if "cleaned_df" in st.session_state:
                 ax.scatter(future_x, future_predictions, color="purple", label="Predicted")  #  Plot the predicted data
                 ax.plot(connected_x, connected_y, color="purple", linestyle="--")  #  Plot the predicted data connected from 2024
 
-                for x_val, y_val in zip(future_x, future_predictions):
+                for x_val, y_val in zip(future_x.flatten(), future_predictions):
                     offset = y_val * 0.02
-                    ax.text(x_val, y_val - offset, f"£{y_val:.2f}", fontsize=8, ha="center", va="top")
+                    ax.text(float(x_val), float(y_val - offset), f"£{y_val:.2f}", fontsize=8, ha="center", va="top")
+
 
             ax.set_xlabel("Year")
             ax.set_ylabel("Average Weekly Expenditure (£)")
             ax.set_title(f"Trend for {selected_commodity}")
             ax.legend()
             st.pyplot(fig)
+
 
 
 
